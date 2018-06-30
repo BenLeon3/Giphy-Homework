@@ -1,0 +1,1 @@
+// var topics = ["dodgers", "yankees", "sf giants", "nationals", "a's", "cubs", "astros"]

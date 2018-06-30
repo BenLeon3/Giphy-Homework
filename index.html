@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Teams</title>
+  <style type="text/css">
+    button,
+    div,
+    form,
+    input {
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Baseball Team Gif Search</h1>
+
+    <!-- Rendered buttons will get dumped here  -->
+    <div id="buttons-view"></div>
+
+    <form id="team-form">
+      <label for="team-input">Add a Team!</label>
+      <input type="text" id="team-input"><br>
+
+      <!-- Button triggers new team to be added -->
+      <input id="add-team" type="submit" value="Add a Team">
+    </form>
+
+    <!-- Teams will get dumped Here -->
+    <div id="teams-view"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // Initial array of baseball teams
+      var topic = ["Dodgers", "Yankees", "SF Giants", "Blue Jays", "Red Sox", "Miami Marlins", "Astros", "Clevland Indians", "Detroit Tigers"];
+
+      // displayTeamInfo function re-renders the HTML to display the appropriate content
+      function displayTeamInfo() {
+
+        var team = $(this).attr("data-name");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + team + "&api_key=veS1ZpaXAfovnes4X5Sw6zhPLFm0ZJlB&limit=10";
+
+        // Creates AJAX call for the specific team button being clicked
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+          console.log(response);
+          
+        var results = response.data; 
+        console.log(results);
+
+    for (var i = 0; i < results.length; i++) {
+        var teamDiv = $("<div class='team'>");
+
+        var rating = results[i].rating;
+        var pOne = $("<p>").text("Rating: " + rating);
+        teamDiv.append(pOne);
+
+        var imgURL = results[i].images.fixed_height.url;
+        var image = $("<img>").attr("src", imgURL);
+        teamDiv.append(image);
+          
+        $("#teams-view").prepend(teamDiv);
+        
+        }
+    });
+
+      }
+
+      // Function for displaying team data
+      function renderButtons() {
+
+        // Deletes the teams prior to adding new teams
+        // (this is necessary otherwise you will have repeat buttons)
+        $("#buttons-view").empty();
+        // Loops through the array of teams
+        for (var i = 0; i < topic.length; i++) {
+
+          // Then dynamicaly generates buttons for each team in the array
+          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+          var a = $("<button>");
+          // Adds a class of team to our button
+          a.addClass("team");
+          // Added a data-attribute
+          a.attr("data-name", topic[i]);
+          // Provided the initial button text
+          a.text(topic[i]);
+          // Added the button to the buttons-view div
+          $("#buttons-view").append(a);
+        }
+      }
+
+      // This function handles events where the add team button is clicked
+      $("#add-team").on("click", function(event) {
+        event.preventDefault();
+        // This line of code will grab the input from the textbox
+        var team = $("#team-input").val().trim();
+
+        // The team from the textbox is then added to our array
+        topic.push(team);
+
+        // Calling renderButtons which handles the processing of our teamteam array
+        renderButtons();
+      });
+
+      // Adding click event listeners to all elements with a class of "team"
+      $(document).on("click", ".team", displayTeamInfo);
+
+      // Calling the renderButtons function to display the intial buttons
+      renderButtons();
+    </script>
+  </div>
+</body>
+
+</html>
