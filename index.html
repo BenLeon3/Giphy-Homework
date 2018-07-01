@@ -58,39 +58,49 @@
         var teamDiv = $("<div class='team'>");
 
         var rating = results[i].rating;
-        var pOne = $("<p>").text("Rating: " + rating);
-        teamDiv.append(pOne);
+        var pElementOne = $("<p>").text("Rating: " + rating);
+        teamDiv.append(pElementOne);
 
-        var imgURL = results[i].images.fixed_height.url;
-        var image = $("<img>").attr("src", imgURL);
+        var imgURL = results[i].images.fixed_height_still.url;
+        var image = $("<img class='gif'>").attr("src", imgURL);
+        
+        image.attr({'data-animate' : results[i].images.fixed_height.url});
+        image.attr({'data-state' : "still"});
+        image.attr({'data-still' : results[i].images.fixed_height_still.url});
+        
+        // This part doesnt work 
+        $(".gif").on("click", function() {
+        var $imgClicked = $(this);
+        var state = $(this).attr("data-state");
+
+          if (state === 'still') {
+            $imgClicked.attr('src', $imgClicked.attr('data-animate'));
+            $imgClicked.attr('data-state', 'animate');
+            } else { 
+            $imgClicked.attr('src', $imgClicked.attr('data-still'));
+            $imgClicked.attr('data-state', 'still');
+          } 
+        });
+
         teamDiv.append(image);
           
         $("#teams-view").prepend(teamDiv);
-        
+
         }
     });
+}
 
-      }
+
 
       // Function for displaying team data
       function renderButtons() {
-
-        // Deletes the teams prior to adding new teams
-        // (this is necessary otherwise you will have repeat buttons)
         $("#buttons-view").empty();
-        // Loops through the array of teams
-        for (var i = 0; i < topic.length; i++) {
-
-          // Then dynamicaly generates buttons for each team in the array
-          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-          var a = $("<button>");
-          // Adds a class of team to our button
-          a.addClass("team");
-          // Added a data-attribute
-          a.attr("data-name", topic[i]);
-          // Provided the initial button text
-          a.text(topic[i]);
-          // Added the button to the buttons-view div
+           for (var j = 0; j < topic.length; j++) {
+             var a = $("<button>");
+             a.addClass("team");
+             a.attr("data-name", topic[j]);
+             a.text(topic[j]);
+    
           $("#buttons-view").append(a);
         }
       }
@@ -98,20 +108,15 @@
       // This function handles events where the add team button is clicked
       $("#add-team").on("click", function(event) {
         event.preventDefault();
-        // This line of code will grab the input from the textbox
         var team = $("#team-input").val().trim();
-
-        // The team from the textbox is then added to our array
         topic.push(team);
-
-        // Calling renderButtons which handles the processing of our teamteam array
+        
         renderButtons();
       });
 
       // Adding click event listeners to all elements with a class of "team"
       $(document).on("click", ".team", displayTeamInfo);
 
-      // Calling the renderButtons function to display the intial buttons
       renderButtons();
     </script>
   </div>
