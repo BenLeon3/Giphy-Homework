@@ -1,0 +1,61 @@
+.container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+}
+
+#main-background{
+    background-color: #008CBA;
+    padding-bottom: 900px;
+}
+
+.click-instructions {
+    background-color: #008CBA;
+    margin-bottom: 0px;
+    padding-top: 20px;
+    
+}
+
+#buttons-view{
+    background-color: #008CBA;
+}
+
+#top-title {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+h1{
+    font-family: 'Monoton', cursive;
+    color: white;
+    background-color: #008CBA;
+    margin-bottom: 0px;
+}
+.team{
+    border-radius: 8px;
+    font-family: 'Monoton', cursive;
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+}
+
+#teams-view{
+    background-color: #008CBA;
+}
+
+#team-form{
+    background-color: #008CBA;
+    float: left;
+}
+
+#add-team {
+    padding-left: 21px;
+    padding-top: 10px;
+}

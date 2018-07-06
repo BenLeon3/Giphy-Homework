@@ -4,34 +4,54 @@
 <head>
   <meta charset="utf-8">
   <title>Favorite Teams</title>
-  <style type="text/css">
-    button,
-    div,
-    form,
-    input {
-      margin: 10px;
-    }
-  </style>
+
+    <!-- Bootstrap -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<!-- CSS LINKS -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+    <!-- JavaScript
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="./assets/javascript/app.js" type="text/javascript"></script> -->
+   
 </head>
 
 <body>
 
-  <div class="container">
-    <h1>Baseball Team Gif Search</h1>
-
-    <!-- Rendered buttons will get dumped here  -->
-    <div id="buttons-view"></div>
-
-    <form id="team-form">
-      <label for="team-input">Add a Team!</label>
-      <input type="text" id="team-input"><br>
-
-      <!-- Button triggers new team to be added -->
-      <input id="add-team" type="submit" value="Add a Team">
-    </form>
-
-    <!-- Teams will get dumped Here -->
-    <div id="teams-view"></div>
+<div class="container-fluid" id="main-background">
+    <div class="row">
+        <div class="col-12">
+            <div class="container-fluid">
+                <div class "row">
+                    <div class="col-12" id="top-title">
+                        <h1>Baseball Team Gif Search</h1>
+                        <p class="click-instructions">Click a button to see gifs!</p>
+                        <!-- Rendered buttons will get dumped here  -->
+                        <div id="buttons-view"></div>
+                    </div>    
+                </div>        
+            </div>
+            <div class="container-fluid">
+                <div class"=row">
+                    <div class"col" id="add-team">
+                        <form id="team-form">
+                            <label for="team-input">Add a Team!</label>
+                            <input type="text" id="team-input"><br>  
+                            <!-- Button triggers new team to be added -->
+                            <input id="add-team" type="submit" value="Add a Team">
+                        </form>
+                    </div>
+                    <div class"col-6">    
+                        <!-- Teams will get dumped Here -->
+                        <div id="teams-view"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -122,6 +142,7 @@
         renderButtons();
     </script>
   </div>
+</div>  
 </body>
 
 </html>
