@@ -21,20 +21,17 @@ function displayTeamInfo() {
         for (var i = 0; i < results.length; i++) {
             var teamDiv = $("<div class='team'>");
 
-            var rating = results[i].rating;
-            var pElementOne = $("<p>").text("Rating: " + rating);
-            teamDiv.append(pElementOne);
-
             var imgURL = results[i].images.fixed_height_still.url;
             var image = $("<img class='gif'>").attr("src", imgURL);
             
             image.attr({'data-animate' : results[i].images.fixed_height.url});
             image.attr({'data-state' : "still"});
             image.attr({'data-still' : results[i].images.fixed_height_still.url});
-            
-            // This part doesnt work 
-            
 
+            var rating = results[i].rating;
+            var pElementOne = $("<p>").text("Rating: " + rating);
+            teamDiv.append(pElementOne);
+            
             teamDiv.append(image);
             
             $("#teams-view").prepend(teamDiv);
